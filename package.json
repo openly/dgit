@@ -1,0 +1,34 @@
+{
+  "name": "dgit",
+  "version": "0.0.1",
+  "description": "A tool to manage dabase with git.",
+  "homePage": "http://dgit.openly.io",
+  "bugs":{
+    "url":"https://github.com/openly/dgit/issues",
+    "email": "abhi.h@openly.co"
+  },
+  "licence":{
+    "type":"MIT",
+    "url":"http://opensource.org/licenses/MIT"
+  },
+  "author":{
+    "name":"Abhilash Hebbar",
+    "email":"abhi.h@openly.co",
+    "url":"http://openly.co/abhi"
+  },
+  "repository":{
+    "type":"git",
+    "url": "https://github.com/openly/dgit.git"
+  },
+  "bin":{"dgit":"./start.js"},
+  "scripts": {
+    "start": "node start"
+  },
+  "dependencies": {
+    "commander":"",
+    "underscore":"",
+    "MD5":"",
+    "async":"",
+    "fs.extra":""
+  }
+}
