@@ -9,20 +9,23 @@ program
   .option('--push','Push to the database')
   .parse(process.argv);
 
-directory = program.dir || process.cwd()
+directory = process.cwd() + '/' +  program.dir
 
-if(!fs.existsSync(directory + '/dbconfig.json'))
+dbConfigFileName = directory + '/dbconfig.json'
+if(!fs.existsSync(dbConfigFileName))
 	console.log "Cannot find the configuation file. Please create one, or use the proper directory.
 				 \nMore info at http://dgit.openly.io/doc/config.\n"
 	process.exit(1)
 
-# dbConfig = require(directory + '/dbconfig.json')
+dbConfig = require(dbConfigFileName)
 
-# DBInterface = require './lib/#{dbConfig.type}' 
+DBInterface = require "./lib/#{dbConfig.type}"
+
+dbObj = new DBInterface(dbConfig);
 
 if(program.pull)
 	console.log "Pulling from db"
-	# DBInterface.pull(dbConfig);
+	dbObj.pull();
 else if(program.push)
 	console.log "Pushing to db"
-	# DBInterface.push(dbConfig);
+	dbObj.push();

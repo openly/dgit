@@ -13,13 +13,15 @@ DBInterface = (function() {
     return console.log('Pull the database contents from "#{env}"?');
   };
 
-  pushL(function(env) {
+  DBInterface.prototype.push = function(env) {
     if (env == null) {
       env = 'local';
     }
     return pass;
-  });
+  };
 
   return DBInterface;
 
 })();
+
+module.exports = DBInterface;

@@ -1,7 +1,7 @@
 {
   "name": "dgit",
   "version": "0.0.1",
-  "description": "A tool to manage dabase with git.",
+  "description": "A tool to manage database with git.",
   "homePage": "http://dgit.openly.io",
   "bugs":{
     "url":"https://github.com/openly/dgit/issues",

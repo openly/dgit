@@ -6,5 +6,7 @@ class DBInterface
     console.log 'Pull the database contents from "#{env}"?'
     
     
-  pushL (env='local')->
+  push: (env='local')->
     pass
+
+module.exports = DBInterface;
