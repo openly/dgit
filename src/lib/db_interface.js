@@ -3,6 +3,7 @@ var DBInterface;
 
 DBInterface = (function() {
   function DBInterface(config) {
+    this._errors = [];
     this.config = config;
   }
 
@@ -10,14 +11,22 @@ DBInterface = (function() {
     if (env == null) {
       env = 'local';
     }
-    return console.log('Pull the database contents from "#{env}"?');
+    return console.log("Pull the database contents from " + env + "?");
   };
 
   DBInterface.prototype.push = function(env) {
     if (env == null) {
       env = 'local';
     }
-    return pass;
+    return console.log("Push the database contents to " + env + "?");
+  };
+
+  DBInterface.prototype.exec = function(command) {
+    return console.log("Execute the shell script command '" + command + "'");
+  };
+
+  DBInterface.prototype.getErrors = function() {
+    return this._errors;
   };
 
   return DBInterface;

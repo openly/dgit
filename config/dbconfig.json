@@ -1,0 +1,16 @@
+[
+    {
+        "type": "mysql",
+        "env":{
+            "local":{
+                "connection":{
+                    "host":"localhost",
+                    "username":"root",
+                    "password":"indian",
+                    "database": "st_search"
+                },
+                "file_name":"st_search"
+            }
+        }
+    }
+]

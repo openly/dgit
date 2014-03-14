@@ -13,19 +13,28 @@ directory = process.cwd() + '/' +  program.dir
 
 dbConfigFileName = directory + '/dbconfig.json'
 if(!fs.existsSync(dbConfigFileName))
-	console.log "Cannot find the configuation file. Please create one, or use the proper directory.
-				 \nMore info at http://dgit.openly.io/doc/config.\n"
-	process.exit(1)
+    console.log "Cannot find the configuation file. Please create one, or use the proper directory.
+                 \nMore info at http://dgit.openly.io/doc/config.\n"
+    process.exit(1)
 
 dbConfig = require(dbConfigFileName)
 
-DBInterface = require "./lib/#{dbConfig.type}"
+errors = []
+for config in dbConfig
+  do (config) ->
+     try
+        DBInterface = require "./lib/#{config.type}"
 
-dbObj = new DBInterface(dbConfig);
+        dbObj = new DBInterface(config);
 
-if(program.pull)
-	console.log "Pulling from db"
-	dbObj.pull();
-else if(program.push)
-	console.log "Pushing to db"
-	dbObj.push();
+        if(program.pull)
+            dbObj.pull();
+        else if(program.push)
+            dbObj.push();
+     catch error
+        errors.push(error)
+
+if errors.length > 0
+    console.log('Error happened', errors);
+else
+    console.log('Successfully Done')
