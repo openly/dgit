@@ -19,4 +19,12 @@ class DBInterface
   getErrors: ->
     return @_errors;
 
+  _getFileName: (env)->
+    fileName = @config['env'][env]['file_name'];
+    if fileName == undefined
+      database = @config['env'][env]['connection']['database'];
+      fileName = @config.type + '_dump_' + database;
+    return fileName;
+
+
 module.exports = DBInterface;

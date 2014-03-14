@@ -13,15 +13,15 @@ MySqlInterface = (function(_super) {
   }
 
   MySqlInterface.prototype.pull = function(env) {
-    var command, conn, e, envConfig;
+    var command, conn, e, fileName;
     if (env == null) {
       env = 'local';
     }
     console.log("Pull the mysql contents from '" + env + "'");
-    envConfig = this.config['env'][env];
-    conn = envConfig.connection;
+    conn = this.config['env'][env].connection;
+    fileName = this._getFileName(env);
     try {
-      command = "mysqldump -u " + conn.username + " -p" + conn.password + " --databases " + conn.database + " > " + envConfig.file_name + ".sql";
+      command = "mysqldump -u " + conn.username + " -p" + conn.password + " --databases " + conn.database + " > " + fileName + ".sql";
       return this.exec(command);
     } catch (_error) {
       e = _error;
@@ -30,15 +30,15 @@ MySqlInterface = (function(_super) {
   };
 
   MySqlInterface.prototype.push = function(env) {
-    var command, conn, e, envConfig;
+    var command, conn, e, fileName;
     if (env == null) {
       env = 'local';
     }
     console.log("Push the mysql contents to '" + env + "'");
-    envConfig = this.config['env'][env];
-    conn = envConfig.connection;
+    conn = this.config['env'][env].connection;
+    fileName = this._getFileName(env);
     try {
-      command = "mysql -u " + conn.username + " -p" + conn.password + " " + conn.database + " < " + envConfig.file_name + ".sql";
+      command = "mysql -u " + conn.username + " -p" + conn.password + " " + conn.database + " < " + fileName + ".sql";
       return this.exec(command);
     } catch (_error) {
       e = _error;
