@@ -9,7 +9,10 @@ program
   .option('--push','Push to the database')
   .parse(process.argv);
 
-directory = process.cwd() + '/' +  program.dir
+directory = process.cwd()
+if (program.dir) {
+   directory += '/' +  program.dir
+}
 
 dbConfigFileName = directory + '/dbconfig.json'
 if(!fs.existsSync(dbConfigFileName))

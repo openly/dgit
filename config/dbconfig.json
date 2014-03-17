@@ -6,10 +6,25 @@
                 "connection":{
                     "host":"localhost",
                     "username":"root",
-                    "password":"indian",
-                    "database": "st_search"
+                    "password":"*****",
+                    "database": "students"
                 },
-                "file_name":"st_search"
+                "output":"students"
+            }
+        }
+    },
+    {
+        "type": "mongo",
+        "env":{
+            "local":{
+                "connection":{
+                    "host":"localhost",
+                    "port":"27017",
+                    "username":"root",
+                    "password":"*****",
+                    "dbpath": "products"
+                },
+                "output":"products"
             }
         }
     }

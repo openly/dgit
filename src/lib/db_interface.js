@@ -31,7 +31,7 @@ DBInterface = (function() {
 
   DBInterface.prototype._getFileName = function(env) {
     var database, fileName;
-    fileName = this.config['env'][env]['file_name'];
+    fileName = this.config['env'][env]['output'];
     if (fileName === void 0) {
       database = this.config['env'][env]['connection']['database'];
       fileName = this.config.type + '_dump_' + database;
