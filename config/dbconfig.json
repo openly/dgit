@@ -22,7 +22,8 @@
                     "port":"27017",
                     "username":"root",
                     "password":"*****",
-                    "dbpath": "products"
+                    "dbpath": "/var/lib/mongodb",
+                    "database":"products"
                 },
                 "output":"products"
             }

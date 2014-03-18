@@ -14,7 +14,7 @@ program.version(pJson.version).option('-d, --dir <dir>', 'Version control direct
 directory = process.cwd();
 
 if (program.dir) {
-  directory = path.resovle(process.cwd(), program.dir);
+  directory = path.resolve(process.cwd(), program.dir);
 }
 
 dbConfigFileName = directory + '/dbconfig.json';

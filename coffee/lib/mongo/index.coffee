@@ -7,7 +7,7 @@ class MongoInterface extends DBInterface
     fileName = @_getFileName(env);
     
     try
-      command = "mongodump --host #{conn.host} --port #{conn.port} --username #{conn.username} --password #{conn.password} --dbpath #{conn.dbpath} --out #{fileName}"
+      command = "mongoexport --host #{conn.host} --port #{conn.port} --username #{conn.username} --password #{conn.password} --dbpath #{conn.dbpath} --db #{conn.database} --out #{fileName}"
       this.exec(command);
     catch e
       @_errors.push(e);
@@ -19,7 +19,7 @@ class MongoInterface extends DBInterface
     fileName = @_getFileName(env);
 
     try 
-      command = "mongorestore --host #{conn.host} --port #{conn.port} --username #{conn.username} --password #{conn.password} --dbpath #{conn.dbpath} --journal #{fileName}" 
+      command = "mongoimport --host #{conn.host} --port #{conn.port} --username #{conn.username} --password #{conn.password} --dbpath #{conn.dbpath} --db #{conn.database} --journal --file #{fileName}" 
       this.exec(command);
     catch e
       @_errors.push(e);

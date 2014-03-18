@@ -11,7 +11,7 @@ program
   .parse(process.argv);
 
 directory = process.cwd()
-directory = path.resovle process.cwd(), program.dir if (program.dir) 
+directory = path.resolve process.cwd(), program.dir if (program.dir) 
 
 dbConfigFileName = directory + '/dbconfig.json'
 if(!fs.existsSync(dbConfigFileName))
