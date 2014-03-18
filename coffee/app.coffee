@@ -1,6 +1,7 @@
 program = require 'commander'
 fs = require 'fs'
 pJson = require '../package.json'
+path = require 'path'
 
 program
   .version(pJson.version)
@@ -10,9 +11,7 @@ program
   .parse(process.argv);
 
 directory = process.cwd()
-if (program.dir) {
-   directory += '/' +  program.dir
-}
+directory = path.resovle process.cwd(), program.dir if (program.dir) 
 
 dbConfigFileName = directory + '/dbconfig.json'
 if(!fs.existsSync(dbConfigFileName))
