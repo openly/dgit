@@ -6,37 +6,36 @@ path = require 'path'
 program
   .version(pJson.version)
   .option('-d, --dir <dir>','Version control directory')
+  .option('-e, --env <env>','Version control environment')
   .option('--pull','Pull from the databse')
   .option('--push','Push to the database')
   .parse(process.argv);
 
 directory = process.cwd()
 directory = path.resolve process.cwd(), program.dir if (program.dir) 
+process.chdir(directory);
 
 dbConfigFileName = directory + '/dbconfig.json'
 if(!fs.existsSync(dbConfigFileName))
-    console.log "Cannot find the configuation file. Please create one, or use the proper directory.
-                 \nMore info at http://dgit.openly.io/doc/config.\n"
-    process.exit(1)
+  console.log "Cannot find the configuation file. Please create one, or use the proper directory.
+               \nMore info at http://dgit.openly.io/doc/config.\n"
+  process.exit(1)
 
 dbConfig = require(dbConfigFileName)
 
 errors = []
-for config in dbConfig
-  do (config) ->
-     try
-        DBInterface = require "./lib/#{config.type}"
 
-        dbObj = new DBInterface(config);
+DBInterface = require "./lib/#{dbConfig.type}"
 
-        if(program.pull)
-            dbObj.pull();
-        else if(program.push)
-            dbObj.push();
-     catch error
-        errors.push(error)
+dbObj = new DBInterface(dbConfig, directory);
+call = ()->
+if(program.pull)
+  call = dbObj.pull;
+else if(program.push)
+  call = dbObj.push;
 
-if errors.length > 0
-    console.log('Error happened', errors);
-else
+call.call dbObj, program.env, (e)->
+  if errors.length > 0
+    console.log('Error', errors);
+  else
     console.log('Successfully Done')

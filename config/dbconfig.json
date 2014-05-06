@@ -1,32 +1,18 @@
-[
-    {
-        "type": "mysql",
-        "env":{
-            "local":{
-                "connection":{
-                    "host":"localhost",
-                    "username":"root",
-                    "password":"*****",
-                    "database": "students"
-                },
-                "output":"students"
+{
+    "type": "mongo",
+    "output": "abhi",
+    "env":{
+        "test":{
+            "connection":{
+                "host":"server",
+                "port":"27017",
+                "database":"currency_cloud_dev"
             }
-        }
-    },
-    {
-        "type": "mongo",
-        "env":{
-            "local":{
-                "connection":{
-                    "host":"localhost",
-                    "port":"27017",
-                    "username":"root",
-                    "password":"*****",
-                    "dbpath": "/var/lib/mongodb",
-                    "database":"products"
-                },
-                "output":"products"
+        },
+        "local":{
+            "connection":{
+                "database":"currency_cloud_dev"
             }
         }
     }
-]
+}
